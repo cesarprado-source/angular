@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1758635826783,
+  "timestamp": 1758636543896,
   "index": "https://github.com/cesarprado-source/angular.git/index.html",
   "assetGroups": [
     {
@@ -56,7 +56,7 @@
     "https://github.com/cesarprado-source/angular.git/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
     "https://github.com/cesarprado-source/angular.git/index.html": "ba1bc63132e38b218545d71eebcf542c652374ad",
     "https://github.com/cesarprado-source/angular.git/main-3OP6FHEU.js": "b0a10ae3c0201ef7736a24284c75b10681df87ff",
-    "https://github.com/cesarprado-source/angular.git/manifest.webmanifest": "76694938e1123532e1be8ad71d827c5639f8eb95",
+    "https://github.com/cesarprado-source/angular.git/manifest.webmanifest": "b63dec804a6d74fcbf902811f4ae610b2d30c9f4",
     "https://github.com/cesarprado-source/angular.git/media/bootstrap-icons-CVBWLLHT.woff2": "b441fcff939e24fa0906a37b7788788b9fddbb68",
     "https://github.com/cesarprado-source/angular.git/media/bootstrap-icons-VQNJTM6Q.woff": "762010c79b4a05e1131fc8fb3b1aeff324d8033f",
     "https://github.com/cesarprado-source/angular.git/polyfills-5CFQRCPP.js": "f2241e9a25858f895ce299d15f6f22e849e2fd72",
