@@ -1,10 +1,10 @@
 <div class="container-fluid py-4 ui-demo">
 
-  <!-- Título -->
+  <!-- Título (único h1 de la vista) -->
   <h1 class="mb-4">Componentes de demostración</h1>
 
   <!-- 1) Tablas -->
-  <section class="mb-4" aria-labelledby="ui-tables-title">
+  <section class="mb-4" aria-labelledby="ui-tables-title" role="region">
     <div class="card shadow-sm">
       <div class="card-header bg-transparent">
         <h2 id="ui-tables-title" class="h5 mb-0 d-flex align-items-center gap-2">
@@ -14,7 +14,11 @@
       </div>
 
       <div class="card-body table-responsive small">
+        <!-- caption oculto para lectores de pantalla -->
         <table class="table table-striped table-hover align-middle">
+          <caption class="visually-hidden">
+            Tabla de usuarios con nombre, correo, rol y acciones disponibles
+          </caption>
           <thead class="table-light">
             <tr>
               <th scope="col">#</th>
@@ -28,31 +32,31 @@
             <tr>
               <th scope="row">1</th>
               <td>Ana Pérez</td>
-              <td>ana@example.com</td>
+              <td><a href="mailto:ana@example.com">ana@example.com</a></td>
               <td><span class="badge text-bg-primary">Admin</span></td>
-              <td>
-                <button class="btn btn-sm btn-outline-secondary">Editar</button>
-                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+              <td class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                <button type="button" class="btn btn-sm btn-outline-danger">Eliminar</button>
               </td>
             </tr>
             <tr>
               <th scope="row">2</th>
               <td>Carlos López</td>
-              <td>carlos@example.com</td>
+              <td><a href="mailto:carlos@example.com">carlos@example.com</a></td>
               <td><span class="badge text-bg-success">Usuario</span></td>
-              <td>
-                <button class="btn btn-sm btn-outline-secondary">Editar</button>
-                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+              <td class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                <button type="button" class="btn btn-sm btn-outline-danger">Eliminar</button>
               </td>
             </tr>
             <tr>
               <th scope="row">3</th>
               <td>Lucía Ramos</td>
-              <td>lucia@example.com</td>
+              <td><a href="mailto:lucia@example.com">lucia@example.com</a></td>
               <td><span class="badge text-bg-warning">Invitado</span></td>
-              <td>
-                <button class="btn btn-sm btn-outline-secondary">Editar</button>
-                <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+              <td class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                <button type="button" class="btn btn-sm btn-outline-danger">Eliminar</button>
               </td>
             </tr>
           </tbody>
@@ -62,13 +66,14 @@
   </section>
 
   <!-- 2) Alertas -->
-  <section class="mb-4" aria-labelledby="ui-alerts-title">
+  <section class="mb-4" aria-labelledby="ui-alerts-title" role="region">
     <h2 id="ui-alerts-title" class="h5 mb-3 d-flex align-items-center gap-2">
       <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
       <span>Alertas</span>
     </h2>
 
-    <div class="d-flex flex-column gap-2">
+    <!-- Polite para mensajes informativos no críticos -->
+    <div class="d-flex flex-column gap-2" aria-live="polite">
       <div class="alert alert-primary" role="alert">Alerta primaria: mensaje informativo.</div>
       <div class="alert alert-success" role="alert">Alerta de éxito: operación realizada correctamente.</div>
       <div class="alert alert-warning" role="alert">Alerta de advertencia: revisa los datos ingresados.</div>
@@ -77,7 +82,7 @@
   </section>
 
   <!-- 3) Formularios -->
-  <section aria-labelledby="ui-forms-title">
+  <section aria-labelledby="ui-forms-title" role="region">
     <div class="card shadow-sm">
       <div class="card-header bg-transparent">
         <h2 id="ui-forms-title" class="h5 mb-0 d-flex align-items-center gap-2">
@@ -87,32 +92,56 @@
       </div>
 
       <div class="card-body">
-        <form>
+        <form novalidate>
           <div class="mb-3">
-            <label for="nombreInput" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombreInput" placeholder="Ingresa tu nombre" />
+            <label for="nombreInput" class="form-label">Nombre <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombreInput"
+              placeholder="Ingresa tu nombre"
+              name="nombre"
+              autocomplete="name"
+              required
+              aria-describedby="nombreHelp"
+            />
+            <div id="nombreHelp" class="form-text">Tu nombre completo tal como figura en tus documentos.</div>
+            <div class="invalid-feedback">Por favor, ingresa tu nombre.</div>
           </div>
 
           <div class="mb-3">
-            <label for="correoInput" class="form-label">Correo electrónico</label>
-            <input type="email" class="form-control" id="correoInput" placeholder="nombre@ejemplo.com" />
+            <label for="correoInput" class="form-label">Correo electrónico <span class="text-danger">*</span></label>
+            <input
+              type="email"
+              class="form-control"
+              id="correoInput"
+              placeholder="nombre@ejemplo.com"
+              name="correo"
+              autocomplete="email"
+              required
+              aria-describedby="correoHelp"
+            />
+            <div id="correoHelp" class="form-text">Usaremos este correo para notificaciones.</div>
+            <div class="invalid-feedback">Introduce un correo electrónico válido.</div>
           </div>
 
           <div class="mb-3">
             <label for="rolSelect" class="form-label">Rol</label>
-            <select class="form-select" id="rolSelect">
-              <option selected>Selecciona un rol</option>
-              <option value="1">Admin</option>
-              <option value="2">Usuario</option>
-              <option value="3">Invitado</option>
+            <select class="form-select" id="rolSelect" name="rol" aria-describedby="rolHelp">
+              <option value="" selected>Selecciona un rol</option>
+              <option value="admin">Admin</option>
+              <option value="usuario">Usuario</option>
+              <option value="invitado">Invitado</option>
             </select>
+            <div id="rolHelp" class="form-text">El rol define los permisos dentro del sistema.</div>
           </div>
 
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="checkTerms" />
+            <input class="form-check-input" type="checkbox" id="checkTerms" name="terms" required />
             <label class="form-check-label" for="checkTerms">
               Acepto los términos y condiciones
             </label>
+            <div class="invalid-feedback">Debes aceptar los términos para continuar.</div>
           </div>
 
           <button type="submit" class="btn btn-primary">Enviar</button>
