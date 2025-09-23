@@ -1,0 +1,11 @@
+.home {
+  min-height: calc(100vh - 120px); /* ocupa alto de la ventana menos navbar/footer */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.home h1 {
+  color: var(--bs-primary);
+}

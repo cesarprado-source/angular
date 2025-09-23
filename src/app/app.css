@@ -1,0 +1,151 @@
+/* ====== Layout base ====== */
+/* El main es flex column; la zona de contenido debe poder overflowear */
+:host ::ng-deep main.d-flex {
+  min-height: 0; /* permite que flex-grow y overflow funcionen bien */
+}
+
+/* El toolbar de arriba del main no debe crecer */
+.dashboard-toolbar {
+  flex-shrink: 0;
+}
+
+/* El contenido central ocupa el resto y tiene scroll si hace falta */
+.dashboard-content {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+/* Evitar hueco por margen del último elemento dentro del contenido */
+.dashboard-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* ====== Sidebar ====== */
+.sidebar {
+  --sidebar-w: 280px;
+}
+
+/* Scroll interno cuando sea necesario */
+.sidebar .offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Estética leve del sidebar */
+.sidebar .nav-link {
+  font-weight: 500;
+  color: var(--bs-body-color);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  margin: .125rem .5rem;
+}
+
+.sidebar .nav-link.active {
+  color: var(--bs-primary);
+  background-color: rgba(var(--bs-primary-rgb), .08);
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link:focus {
+  background-color: rgba(0, 0, 0, .035);
+  text-decoration: none;
+}
+
+/* ====== Offcanvas CSS-only ====== */
+/* En < md, el offcanvas está oculto a la derecha; se muestra con :target */
+@media (max-width: 767.98px) {
+  .sidebar .offcanvas-md {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--sidebar-w);
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform .25s ease, visibility .25s ease;
+    z-index: 1045; /* por encima de .navbar */
+    box-shadow: var(--bs-box-shadow-lg);
+  }
+
+  /* Mostrar cuando es objetivo de :target */
+  .sidebar .offcanvas-md:target {
+    transform: translateX(0%);
+    visibility: visible !important;
+  }
+
+  /* Backdrop del sidebar: se activa cuando el offcanvas está :target */
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    display: none;
+    z-index: 1040;
+  }
+  /* Selector que depende de la estructura: el backdrop está a continuación del .offcanvas-md */
+  #sidebarMenu:target + .sidebar-backdrop {
+    display: block;
+  }
+}
+
+/* En >= md, el offcanvas se comporta como panel fijo */
+@media (min-width: 768px) {
+  .sidebar .offcanvas-md {
+    position: static;
+    bottom: 0;
+    visibility: visible !important;
+    transform: none !important;
+    border-right: 1px solid rgba(0, 0, 0, .08);
+    width: auto; /* usa el ancho de la columna (col-md-3/col-lg-2) */
+    box-shadow: none;
+  }
+  .sidebar .offcanvas-header {
+    display: none;
+  }
+  .sidebar .offcanvas-body {
+    height: calc(100vh - 56px); /* 56px ≈ altura de la navbar por defecto */
+  }
+}
+
+/* ====== Navbar search (CSS-only) ====== */
+.navbar-search {
+  display: none; /* oculto en móvil por defecto */
+  background: var(--bs-body-bg);
+}
+.navbar-search .form-control {
+  height: 44px;
+}
+.navbar .search-close {
+  position: absolute;
+  inset: 0;
+  /* invisible pero clickeable para cerrar tocando fuera del input */
+}
+@media (max-width: 767.98px) {
+  /* Mostrar cuando es target */
+  #navbarSearch:target {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  /* En md+ que quede visible como barra inline y sin close overlay */
+  .navbar-search {
+    display: block;
+    background: transparent;
+  }
+  .navbar .search-close {
+    display: none;
+  }
+}
+
+/* ====== Tablas demo un poco más compactas ====== */
+.table-responsive.small {
+  font-size: .875rem;
+}
+
+/* ====== Utilidades ====== */
+.min-vh-100 {
+  min-height: 100vh !important;
+}
